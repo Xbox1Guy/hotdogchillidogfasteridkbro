@@ -3,125 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hazbin Archives — Homepage</title>
+  <title>Welcome to Hazbin Archives</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Styles specific to the landing page */
+    .landing-body {
+      background-image: url('https://files.catbox.moe/28jmba.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      color: var(--text-color);
+    }
+
+    .landing-box {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3rem 4rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      max-width: 500px;
+    }
+
+    .landing-box h1 {
+      font-family: 'Hb_font-Regular', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .landing-box p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .landing-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Use the existing .btn class and extend it */
+    .btn.discord {
+      background-color: #5865f2;
+      color: white;
+    }
+
+    .btn.discord:hover {
+      background-color: #4752c4;
+    }
+
+    /* ✅ NEW: Style for the disabled button */
+    .btn.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none; /* Prevents clicking on the link */
+    }
+  </style>
 </head>
-<body>
-  <header class="navbar">
-    <div class="nav-inner">
-      <div class="logo">
-        <img src="https://files.catbox.moe/l4kdn8.png" alt="Hazbin Archives Logo" />
-      </div>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="#seasons" class="nav-link">Seasons</a>
-        <a href="https://discord.gg/Ek4GJrvNEZ" target="_blank" class="nav-link discord">Discord</a>
-      </nav>
-    </div>
-  </header>
+<body class="landing-body">
 
-  <main class="app">
-    <section class="hero" aria-label="Show hero">
-      <video class="hero-video" autoplay muted loop playsinline poster="https://via.placeholder.com/1920x1080?text=Hero+Poster">
-        <source src="https://files.catbox.moe/c32n47.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-gradient" aria-hidden="true"></div>
-      <div class="hero-content container">
-        <img src="https://files.catbox.moe/0i5xfo.jpeg" alt="Hazbin Hotel" class="poster" />
-        <div class="hero-text">
-          <h1 class="title">Hazbin Hotel</h1>
-          <p class="tagline">The first Vivziepop show to be on Prime Video.</p>
-          <p class="description">
-            This adult animated musical series follows Charlie, the princess of Hell, as she pursues her seemingly impossible goal of rehabilitating demons to peacefully reduce overpopulation in her kingdom. After a yearly extermination that was imposed by Heaven, she opens a hotel in the hopes that patrons will be "checking out" after proving their souls are redeemable.
-          </p>
-          <div class="hero-ctas">
-            <button class="btn primary" onclick="goToSeason(1)"><span class="icon">▶</span> Play Season 1</button>
-            <button class="btn outline" onclick="document.getElementById('seasons').scrollIntoView({ behavior: 'smooth' })">See Seasons</button>
-          </div>
-          <div class="meta">
-            <span class="pill">TV-MA</span>
-            <span> • </span>
-            <span>4 Seasons</span>
-            <span> • </span>
-            <span>2019</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="seasons" class="seasons-section container">
-      <h2 class="section-title">Seasons</h2>
-      
-      <div class="carousel-wrapper">
-        <button class="carousel-btn prev" aria-label="Previous">&lsaquo;</button>
-        <div class="carousel" aria-label="Seasons carousel">
-          
-          <div class="season-card" data-season="1" tabindex="0">
-            <div class="thumb">
-              <img src="https://files.catbox.moe/cfk575.png" alt="Season 1 poster" />
-            </div>
-            <div class="card-body">
-              <div class="card-info">
-                <strong>Season 1</strong>
-                <small>8 Episodes</small>
-              </div>
-              <div class="card-actions">
-                <button class="action-btn play" onclick="goToSeason(1)" aria-label="Play">▶</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="season-card" data-season="2" tabindex="0">
-            <div class="thumb">
-              <img src="https://files.catbox.moe/0i5xfo.jpeg" alt="Season 2 poster" />
-            </div>
-            <div class="card-body">
-              <div class="card-info">
-                <strong>Season 2</strong>
-                <small>8 Episodes</small>
-              </div>
-              <div class="card-actions">
-                <button class="action-btn play" onclick="goToSeason(2)" aria-label="Play">▶</button>
-              </div>
-            </div>
-          </div>
-          
-          </div>
-        <button class="carousel-btn next" aria-label="Next">&rsaquo;</button>
-      </div>
-    </section>
-
-    <section class="credits container">
-      <h2 class="section-title">Credits</h2>
-      <ul class="credits-list">
-        <li><strong>Show by:</strong> VivziePop</li>
-        <li><strong>Phantomexe:</strong> For letting me help you create the Discord server, also OG owner of the server</li>
-        <li><strong>Danny:</strong> For helping out with A LOT of stuff</li>
-        <li><strong>Ryth1m:</strong> For inspiring me to help with leaks content (like removing the watermark and colouring in the storyboards) and for being the first member in the server</li>
-        <li><strong>Fuzzycut:</strong> for helping out with the server</li>
-        <li><strong>Xbox1Guy:</strong> New owner of the website and the Hazbin Archives Discord server</li>
-        <li><strong> </strong>  </li>
-        <li><strong>I just want to thank all of you members for making this possible. I never thought that this server would've blew up. If it wasn't for Phantomexe and Danny working on the server to make it the best that it can be, this server wouldn't exist. I'm truly thankful for all of this, and a way to show my appreciation is to make this website where I'll be hosting Hazbin Hotel content for free without advertisement! If you're done reading this, I hope you have a great day!
-
--Xbox1Guy</strong> </li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 Hazbin Archives. Hosted on GitHub Pages.</p>
-    </div>
-  </footer>
-
-  <div id="unavailable-modal" class="modal-overlay">
-    <div class="modal-content">
-      <h3>Coming Soon!</h3>
-      <p>Season 2 is currently unavailable and is scheduled to be released on 29th October.</p>
-      <button id="modal-close-btn" class="btn primary">Got it</button>
+  <div class="landing-box">
+    <h1>Join the Archives</h1>
+    <p>To access the website, please join our official Discord server.</p>
+    <div class="landing-buttons">
+      <a href="https://discord.gg/Ek4GJrvNEZ" target="_blank" id="discord-btn" class="btn discord">Join the Discord</a>
+      <a href="home.html" id="continue-btn" class="btn outline disabled">Continue to Site</a>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const discordBtn = document.getElementById('discord-btn');
+      const continueBtn = document.getElementById('continue-btn');
+
+      // Function to enable the continue button
+      const enableContinue = () => {
+        continueBtn.classList.remove('disabled');
+      };
+
+      // Check if the user has already clicked the Discord link
+      if (localStorage.getItem('hasClickedDiscord') === 'true') {
+        enableContinue();
+      }
+
+      // Add click listener to the Discord button
+      discordBtn.addEventListener('click', () => {
+        // Store the action so the user doesn't have to do it again
+        localStorage.setItem('hasClickedDiscord', 'true');
+        // Enable the continue button after a short delay
+        setTimeout(enableContinue, 500); // 0.5 second delay
+      });
+    });
+  </script>
+
 </body>
 </html>
