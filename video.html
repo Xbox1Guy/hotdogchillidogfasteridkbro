@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hazbin Archives — Player</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-image: url('https://files.catbox.moe/28jmba.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .player-page {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 1.5fr);
+      gap: 2rem;
+      padding: 2rem 0;
+      max-width: 1400px;
+    }
+    .video-main {
+      grid-column: 1 / 2;
+    }
+    .episode-sidebar {
+      grid-column: 2 / 3;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding-right: 10px; /* Space for scrollbar */
+    }
+    .video-wrapper {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #000;
+    }
+    #video-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000; /* Adds a black background for loading */
+    }
+    #season-title {
+      font-size: 2.4rem;
+      margin: 0 0 1rem 0;
+    }
+    #episode-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .episode-card {
+      display: flex;
+      gap: 1rem;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      border-left: 3px solid transparent;
+      align-items: flex-start;
+    }
+    .episode-card:hover {
+      background: rgba(255,255,255,0.08);
+    }
+    .episode-card.active {
+      background: rgba(255,255,255,0.1);
+      border-left: 3px solid var(--accent);
+    }
+    .episode-thumb {
+      width: 120px;
+      height: 70px;
+      flex-shrink: 0;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .episode-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .episode-details h4 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1rem;
+    }
+    .episode-details p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .episode-details p.expanded {
+      -webkit-line-clamp: initial;
+    }
+    .show-more-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-top: 4px;
+      font-size: 0.9rem; /* Slightly increased size for the new font */
+      align-self: flex-start;
+      /* ✅ CHANGES APPLIED HERE */
+      color: var(--text-color);
+      font-family: 'Hb_font-Regular', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .back-btn {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-family: 'Hb_font-Regular', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .episode-sidebar::-webkit-scrollbar{ width: 8px; }
+    .episode-sidebar::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.1); border-radius: 8px; }
+
+    #season-title,
+    .episode-sidebar h3 {
+      font-family: 'Hb_font-Regular', sans-serif;
+      letter-spacing: 1px;
+    }
+    .episode-sidebar h3 {
+      font-size: 1.6rem;
+    }
+    #now-playing-indicator {
+      font-family: 'Hb_font-Regular', sans-serif;
+      letter-spacing: 0.5px;
+      margin: -0.5rem 0 1.25rem 0;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 300ms ease-out forwards;
+    }
+
+    @media (max-width: 980px) {
+      .player-page { grid-template-columns: 1fr; }
+      .video-main { grid-row: 1 / 2; }
+      .episode-sidebar { grid-row: 2 / 3; max-height: 50vh; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <button onclick="history.back()" class="btn outline back-btn">Back to Show</button>
+    <div class="player-page">
+      <div class="video-main">
+        <h2 id="season-title"></h2>
+        <p id="now-playing-indicator"></p>
+        <div class="video-wrapper">
+          <video
+            id="video-frame"
+            src=""
+            controls
+            autoplay
+            playsinline
+          >
+            <track
+              id="subtitle-track"
+              label="English"
+              kind="subtitles"
+              srclang="en"
+              src=""
+              default
+            >
+          </video>
+        </div>
+      </div>
+      <aside class="episode-sidebar">
+        <h3>Episodes</h3>
+        <div id="episode-list">
+          </div>
+      </aside>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
