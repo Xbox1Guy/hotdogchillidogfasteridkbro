@@ -107,9 +107,8 @@
       cursor: pointer;
       padding: 0;
       margin-top: 4px;
-      font-size: 0.9rem; /* Slightly increased size for the new font */
+      font-size: 0.9rem;
       align-self: flex-start;
-      /* ✅ CHANGES APPLIED HERE */
       color: var(--text-color);
       font-family: 'Hb_font-Regular', sans-serif;
       letter-spacing: 0.5px;
@@ -147,10 +146,19 @@
       animation: fadeIn 300ms ease-out forwards;
     }
 
+    /* ✅ --- MOBILE STYLES UPDATED BELOW --- ✅ */
     @media (max-width: 980px) {
-      .player-page { grid-template-columns: 1fr; }
-      .video-main { grid-row: 1 / 2; }
-      .episode-sidebar { grid-row: 2 / 3; max-height: 50vh; }
+      .container {
+        padding: 0 1rem; /* Reduced padding for smaller screens */
+      }
+      .player-page {
+        /* Switched to Flexbox for simpler stacking on mobile */
+        display: flex;
+        flex-direction: column;
+      }
+      .episode-sidebar {
+        max-height: none; /* Allow list to take its full natural height */
+      }
     }
   </style>
 </head>
