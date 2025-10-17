@@ -219,6 +219,7 @@ body {
   color: white;
   display: flex;
   align-items: center;
+  justify-content: center; /* ✅ FIX: This centers the text and icon */
   gap: 0.5rem;
 }
 
@@ -273,6 +274,7 @@ body {
 
 .carousel {
   display: flex;
+  justify-content: center;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -502,6 +504,7 @@ body {
   .hero-content .poster {
     width: 180px;
     height: auto;
+    margin: 0 auto;
   }
   .hero-text .title {
     font-size: 3rem;

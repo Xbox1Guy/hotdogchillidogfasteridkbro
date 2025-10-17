@@ -36,7 +36,7 @@
           </p>
           <div class="hero-ctas">
             <button class="btn primary" onclick="goToSeason(1)"><span class="icon">▶</span> Play Season 1</button>
-            <button class="btn outline" onclick="document.getElementById('seasons').scrollIntoView({ behavior: 'smooth' })">See Seasons</button>
+            <button class="btn outline" onclick="goToSeason(2)">See Seasons</button>
           </div>
           <div class="meta">
             <span class="pill">TV-MA</span>
@@ -56,7 +56,7 @@
         <button class="carousel-btn prev" aria-label="Previous">&lsaquo;</button>
         <div class="carousel" aria-label="Seasons carousel">
           
-          <div class="season-card" data-season="1" tabindex="0">
+          <div class="season-card" data-season="1" tabindex="0" onclick="goToSeason(1)">
             <div class="thumb">
               <img src="https://files.catbox.moe/cfk575.png" alt="Season 1 poster" />
             </div>
@@ -66,12 +66,12 @@
                 <small>8 Episodes</small>
               </div>
               <div class="card-actions">
-                <button class="action-btn play" onclick="goToSeason(1)" aria-label="Play">▶</button>
+                <button class="action-btn play" aria-label="Play">▶</button>
               </div>
             </div>
           </div>
 
-          <div class="season-card" data-season="2" tabindex="0">
+          <div class="season-card" data-season="2" tabindex="0" onclick="goToSeason(2)">
             <div class="thumb">
               <img src="https://files.catbox.moe/0i5xfo.jpeg" alt="Season 2 poster" />
             </div>
@@ -81,7 +81,7 @@
                 <small>8 Episodes</small>
               </div>
               <div class="card-actions">
-                <button class="action-btn play" onclick="goToSeason(2)" aria-label="Play">▶</button>
+                <button class="action-btn play" aria-label="Play">▶</button>
               </div>
             </div>
           </div>
@@ -113,14 +113,6 @@
       <p>© 2025 Hazbin Archives. Hosted on GitHub Pages.</p>
     </div>
   </footer>
-
-  <div id="unavailable-modal" class="modal-overlay">
-    <div class="modal-content">
-      <h3>Coming Soon!</h3>
-      <p>Season 2 is currently unavailable and is scheduled to be released on 29th October.</p>
-      <button id="modal-close-btn" class="btn primary">Got it</button>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>

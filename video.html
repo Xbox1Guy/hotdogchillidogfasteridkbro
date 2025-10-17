@@ -146,18 +146,44 @@
       animation: fadeIn 300ms ease-out forwards;
     }
 
-    /* ✅ --- MOBILE STYLES UPDATED BELOW --- ✅ */
+    /* ✅ --- STYLES FOR SEASON 2 LAYOUT --- ✅ */
+    .player-page.centered-layout {
+        display: flex;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+    .centered-layout .episode-sidebar {
+        grid-column: 1 / -1; /* Take full width in case grid is still active */
+        max-width: 700px;
+        width: 100%;
+        max-height: none;
+    }
+    .episode-card.is-placeholder {
+        cursor: default;
+        background: rgba(30, 30, 30, 0.4);
+    }
+    .episode-card.is-placeholder:hover {
+        background: rgba(30, 30, 30, 0.4);
+        border-color: rgba(255,255,255,0.05);
+    }
+    .air-date {
+        display: block;
+        margin-top: 8px;
+        color: #a2cffe; /* Light blue accent for date */
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
     @media (max-width: 980px) {
       .container {
-        padding: 0 1rem; /* Reduced padding for smaller screens */
+        padding: 0 1rem;
       }
       .player-page {
-        /* Switched to Flexbox for simpler stacking on mobile */
         display: flex;
         flex-direction: column;
       }
       .episode-sidebar {
-        max-height: none; /* Allow list to take its full natural height */
+        max-height: none;
       }
     }
   </style>
