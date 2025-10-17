@@ -89,7 +89,7 @@ const seasonData = {
         title: "Episode 2: Storyteller",
         description: "Sir Pentious' redemption creates a stir in Heaven, but not everyone is happy to see a sinner redeemed.",
         thumbnail: "https://files.catbox.moe/mezpeg.png",
-        airDate: "2025-10-29" // ✅ Confirmed Date Only
+        airDate: "2025-10-29T07:00:00Z" // ✅ Confirmed Date Only
       },
       {
         title: "Episode 3: Hazbin Hotel: Behind Closed Doors",
