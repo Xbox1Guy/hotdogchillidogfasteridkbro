@@ -196,23 +196,14 @@
         <h2 id="season-title"></h2>
         <p id="now-playing-indicator"></p>
         <div class="video-wrapper">
-          <video
+          <iframe
             id="video-frame"
             src=""
-            controls
-            autoplay
-            playsinline
-          >
-            <track
-              id="subtitle-track"
-              label="English"
-              kind="subtitles"
-              srclang="en"
-              src=""
-              default
-            >
-          </video>
-        </div>
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          </div>
       </div>
       <aside class="episode-sidebar">
         <h3>Episodes</h3>
