@@ -83,49 +83,51 @@ const seasonData = {
         title: "Episode 1: New Pentious",
         description: "Charlie's victory against Heaven has sinners flocking to the newly rebuilt Hazbin Hotel. But can she make sure they're all there for the right reasons? Meanwhile, Vox reveals his plan for the Vees to gain their ultimate victory.",
         thumbnail: "https://files.catbox.moe/3dokf8.png",
-        airDate: "2025-10-29T07:00:00Z" // ✅ Confirmed Date & Time
+        // ✅ CHANGED: URL added, airDate removed
+        url: "https://player.vimeo.com/video/1131586963"
       },
       {
         title: "Episode 2: Storyteller",
         description: "Sir Pentious' redemption creates a stir in Heaven, but not everyone is happy to see a sinner redeemed.",
         thumbnail: "https://files.catbox.moe/mezpeg.png",
-        airDate: "2025-10-29T07:00:00Z" // ✅ Confirmed Date Only
+        // ✅ CHANGED: URL added, airDate removed
+        url: "https://player.vimeo.com/video/1131593958"
       },
       {
         title: "Episode 3: Hazbin Hotel: Behind Closed Doors",
         description: "Charlie invites Voxtek to do a piece on the Hotel and Pentious' redemption. But she will need hard proof to convince her skeptical guests.",
         thumbnail: "https://files.catbox.moe/svs231.png",
-        airDate: "2025-11-05" // ✅ Confirmed Date Only
+        airDate: "2025-11-05" // ✅ KEPT: This will remain grayed out
       },
       {
         title: "Episode 4: It's A Deal",
         description: "Charlie tries to do damage control by going live on television! Meanwhile, Alastor reaches his final straw.",
         thumbnail: "https://files.catbox.moe/hb91sh.png",
-        airDate: "2025-11-05" // ✅ Confirmed Date Only
+        airDate: "2025-11-05" // ✅ KEPT: This will remain grayed out
       },
       {
         title: "Episode 5: Silenced",
         description: "Vox hosts a rally for his increasing supporters. Meanwhile, Charlie looks to Heaven for help.",
         thumbnail: "https://files.catbox.moe/7cwonn.png",
-        airDate: "2025-11-12" // ✅ Confirmed Date Only
+        airDate: "2025-11-12" // ✅ KEPT: This will remain grayed out
       },
       {
         title: "Episode 6: Scream Rain",
         description: "Vox leads the overlords toward war with Heaven. Tensions run high at the hotel and Husk returns to his old ways.",
         thumbnail: "https://files.catbox.moe/14u3zn.png",
-        airDate: "2025-11-12" // ✅ Confirmed Date Only
+        airDate: "2025-11-12" // ✅ KEPT: This will remain grayed out
       },
       {
         title: "Episode 7: Weapon of Mass Distraction",
         description: "Vox unveils his secret weapon, giving Heaven their final warning.",
         thumbnail: "https://files.catbox.moe/23oy8v.png",
-        airDate: "2025-11-19" // ✅ Confirmed Date Only
+        airDate: "2025-11-19" // ✅ KEPT: This will remain grayed out
       },
       {
         title: "Episode 8: Curtain Call",
         description: "Vox (and the Vees, I guess) is hosting a party so everyone can watch him take over Heaven - and you're all invited!",
         thumbnail: "https://files.catbox.moe/xrr5jv.png",
-        airDate: "2025-11-19" // ✅ Confirmed Date Only
+        airDate: "2025-11-19" // ✅ KEPT: This will remain grayed out
       }
     ]
   }
@@ -173,11 +175,18 @@ window.addEventListener("DOMContentLoaded", () => {
     */
     
     // Logic for Season 2 Layout
-    if (season === '2') {
+    // ⚠️ THIS LOGIC IS NOW MODIFIED:
+    // We check if *any* episode has a URL. If not, it's the centered layout.
+    // If *some* episodes have URLs, we show the player.
+    const s2HasPlayable = currentSeason && season === '2' && currentSeason.episodes.some(ep => ep.url);
+
+    if (season === '2' && !s2HasPlayable) {
+      // Original logic: No S2 episodes are playable, hide player
       document.querySelector('.video-main').style.display = 'none';
       document.querySelector('.player-page').classList.add('centered-layout');
       document.querySelector('.episode-sidebar h3').textContent = 'Season 2 Release Schedule';
     } else {
+       // S1 or S2 with *some* playable episodes: Show player
        // 🛑 VIMEO: Commented out saveProgress interval
        // setInterval(saveProgress, 5000); // Only save progress if it's a watchable season
     }
@@ -193,8 +202,15 @@ window.addEventListener("DOMContentLoaded", () => {
     */
 
     if (currentSeason && currentSeason.episodes.length > 0) {
-      if (season !== '2') title.textContent = currentSeason.title;
+      if (season !== '2') {
+         title.textContent = currentSeason.title;
+      } else if (s2HasPlayable) {
+         // ✅ If S2 has playable content, show the title
+         title.textContent = currentSeason.title;
+      }
+      
       episodeList.innerHTML = '';
+      let firstPlayableEpisodeIndex = -1; // To track the first playable S2 episode
 
       currentSeason.episodes.forEach((episode, index) => {
         const card = document.createElement("div");
@@ -203,16 +219,15 @@ window.addEventListener("DOMContentLoaded", () => {
         let descriptionHTML;
         let showMoreLogic = false;
 
-        if (season === '2') {
-          descriptionHTML = `<p class="expanded">${episode.description}</p>`;
-        } else {
-          showMoreLogic = episode.description.length > 60;
-          const showMoreButton = showMoreLogic ? `<button class="show-more-btn">Show more</button>` : '';
-          descriptionHTML = `<p>${episode.description}</p>${showMoreButton}`;
-        }
+        // ✅ This logic now works for S2 as well
+        showMoreLogic = episode.description.length > 60;
+        const showMoreButton = showMoreLogic ? `<button class="show-more-btn">Show more</button>` : '';
+        descriptionHTML = `<p>${episode.description}</p>${showMoreButton}`;
+
 
         let airDateHTML = '';
-        if (season === '2' && episode.airDate) {
+        // ✅ This logic is still correct. If airDate exists, it's a placeholder.
+        if (episode.airDate) {
             let date, options, prefix;
 
             // ✅ Check if the airDate string includes a time ('T')
@@ -223,7 +238,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 prefix = "Airs:";
             } else {
                 // If it's just a date, format date-only and specify UTC to prevent timezone shifting the day
-                date = new GDate(episode.airDate + 'T00:00:00Z');
+                date = new Date(episode.airDate + 'T00:00:00Z'); // Note: Changed GDate to Date for broader compatibility
                 options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
                 prefix = "Airs on:";
             }
@@ -242,8 +257,13 @@ window.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
 
-        // Only add click events for playable seasons
-        if (season !== '2') {
+        // ✅ This logic is now key: Only add click if there's a URL
+        if (episode.url) {
+            // Track the first playable episode
+            if (firstPlayableEpisodeIndex === -1) {
+                firstPlayableEpisodeIndex = index;
+            }
+
             card.addEventListener("click", (event) => {
               if (event.target.classList.contains('show-more-btn')) return;
 
@@ -281,13 +301,14 @@ window.addEventListener("DOMContentLoaded", () => {
         episodeList.appendChild(card);
       });
       
-      // Only resume playback for playable seasons
-      if (season !== '2') {
+      // ✅ This now correctly loads S1's first ep OR S2's first *playable* ep
+      let episodeToLoadIndex = (firstPlayableEpisodeIndex !== -1) ? firstPlayableEpisodeIndex : 0;
+      
+      if (season === '1') { // S1 still supports resume-logic (if you re-enable it)
           // 🛑 VIMEO: Commented out playback resumption logic
           /*
           const savedStateJSON = localStorage.getItem('lastWatched');
-          let episodeToLoadIndex = 0;
-
+          
           if (savedStateJSON) {
             const savedState = JSON.parse(savedStateJSON);
             if (savedState.season === season) {
@@ -298,13 +319,13 @@ window.addEventListener("DOMContentLoaded", () => {
             }
           }
           */
-         
-          // Always load the first episode by default now
-          let episodeToLoadIndex = 0;
-          if (episodeList.children[episodeToLoadIndex]) {
-              episodeList.children[episodeToLoadIndex].click();
-          }
       }
+
+      // Click the first episode (S1) or first *playable* episode (S2)
+      if (episodeList.children[episodeToLoadIndex] && currentSeason.episodes[episodeToLoadIndex].url) {
+          episodeList.children[episodeToLoadIndex].click();
+      }
+
     } else {
       title.textContent = `Content for this season is not available yet.`;
       episodeList.innerHTML = '';
