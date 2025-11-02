@@ -15,14 +15,14 @@ const seasonData = {
         title: "Pilot: That's Entertainment",
         description: "Charlie, the princess of Hell, pursues her seemingly impossible goal of rehabilitating demons to peacefully reduce overpopulation in her kingdom.",
         thumbnail: "https://files.catbox.moe/rliimo.jpg",
-        url: "https://archive.org/download/hazbin-hotel-full-episodes-final-ver/Hazbin-Hotel-s1-e0%201080p.mp4", // 🛑 This MP4 link will likely not play in the new <iframe>
+        url: "https://player.vimeo.com/video/1132843685?autoplay=1&playsinline=1", // 🛑 This MP4 link will likely not play in the new <iframe>
         subtitles: "subtitles/Hazbin-Hotel-s1-e0_1080p.en.vtt"
       },
       {
         title: "Episode 1: Overture",
         description: "Charlie pitches her plan to rehabilitate sinners to Heaven. Vaggie creates a commercial to promote the hotel, with disastrous results.",
         thumbnail: "https://files.catbox.moe/vw6i1j.jpg",
-        url: "https://player.vimeo.com/video/1131531052?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://player.vimeo.com/video/1132850961?autoplay=1&playsinline=1", // ✅ Vimeo URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e1_1080p.en.vtt"
       },
       {
