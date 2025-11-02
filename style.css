@@ -575,3 +575,15 @@ body {
     height: 220px;
   }
 }
+/* --- Signature Style --- */
+.signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-direction: row-reverse; /* <-- NEW: Reverses the order of items */
+}
+
+.signature img {
+  height: 2.8em; /* <-- CHANGED: Made it slightly bigger (was 1.2em) */
+  width: auto;
+}
