@@ -374,6 +374,33 @@ window.addEventListener("DOMContentLoaded", () => {
       }
   });
 
+  // ✅ NEW: Logic for the "About" Modal
+  const logoTrigger = document.getElementById("about-logo-trigger");
+  const aboutModal = document.getElementById("about-modal");
+  // Note: Your CSS already targets #modal-close-btn, so we use that ID
+  const modalCloseBtn = document.getElementById("modal-close-btn");
+
+  if (logoTrigger && aboutModal && modalCloseBtn) {
+    // Open modal when logo is clicked
+    logoTrigger.addEventListener("click", () => {
+      aboutModal.classList.add("show");
+    });
+
+    // Close modal with the "Go Back" button
+    modalCloseBtn.addEventListener("click", () => {
+      aboutModal.classList.remove("show");
+    });
+
+    // Close modal by clicking on the blurred overlay
+    aboutModal.addEventListener("click", (e) => {
+      // We check if the click was on the overlay itself, not the content box
+      if (e.target === aboutModal) {
+        aboutModal.classList.remove("show");
+      }
+    });
+  }
+  // --- End of new modal logic ---
+
   document.body.style.opacity = 0;
   document.body.style.transition = "opacity 420ms ease";
   requestAnimationFrame(() => (document.body.style.opacity = 1));

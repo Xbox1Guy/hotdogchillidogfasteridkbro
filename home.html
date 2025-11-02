@@ -9,7 +9,7 @@
 <body>
   <header class="navbar">
     <div class="nav-inner">
-      <div class="logo">
+      <div class="logo" id="about-logo-trigger" style="cursor: pointer;" title="About Hazbin Archives">
         <img src="https://files.catbox.moe/l4kdn8.png" alt="Hazbin Archives Logo" />
       </div>
       <nav class="nav-links">
@@ -113,6 +113,22 @@
       <p>© 2025 Hazbin Archives. Hosted on GitHub Pages.</p>
     </div>
   </footer>
+
+  <div class="modal-overlay" id="about-modal">
+    <div class="modal-content">
+      <img src="https://files.catbox.moe/l4kdn8.png" alt="Hazbin Archives Logo" style="height: 60px; margin-bottom: 1rem;">
+      
+      <h3>About Us! :D</h3>
+      
+      <p style="color: var(--muted); text-align: center; font-size: 0.95rem;">
+        Heyo everyone! It's a pleasure to see that people are actually visiting this piracy site. Anyways, I just wanna thank the Hazbin Archives staff and the community for making this possible. It's been my dream to make a piracy site without any ads since most of them have those annoying ones, like "Hot single girls in your area!" and some other ones. I really hope you appreciate this site and use it for when upcoming episodes come out!
+        <br><br>
+        - Xbox1Guy
+      </p>
+      
+      <button class="btn outline" id="modal-close-btn">Go Back</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
