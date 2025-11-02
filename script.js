@@ -404,4 +404,57 @@ window.addEventListener("DOMContentLoaded", () => {
   document.body.style.opacity = 0;
   document.body.style.transition = "opacity 420ms ease";
   requestAnimationFrame(() => (document.body.style.opacity = 1));
+
+  // --- Custom Smooth Scroll with Easing ---
+  
+  // Find all links that start with '#'
+  const allAnchorLinks = document.querySelectorAll('a[href^="#"]');
+  
+  allAnchorLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // 1. Stop the default "jump"
+      e.preventDefault();
+      
+      const href = this.getAttribute('href');
+      const targetId = href.substring(1); // Get the ID name (e.g., "seasons")
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // 2. Get the position we need to scroll to
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        
+        // 3. Call our custom scroll function
+        customSmoothScroll(targetPosition, 500); // 1000ms = 1 second duration
+      }
+    });
+  });
+
+  // Our custom animation function
+  function customSmoothScroll(targetPosition, duration) {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    // Easing function: easeInOutQuad
+    // 't' is progress from 0 to 1
+    const easeInOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    function animationLoop(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1); // 0 to 1
+      const easedProgress = easeInOutQuad(progress); // Apply easing
+      
+      const newPosition = startPosition + distance * easedProgress;
+      window.scrollTo(0, newPosition);
+
+      // Keep animating until duration is over
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animationLoop);
+      }
+    }
+    requestAnimationFrame(animationLoop);
+  }
+  // --- End of Custom Smooth Scroll ---
 });

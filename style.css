@@ -28,7 +28,6 @@ body {
   margin: 0;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
