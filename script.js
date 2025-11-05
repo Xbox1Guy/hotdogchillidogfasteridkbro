@@ -97,13 +97,13 @@ const seasonData = {
         title: "Episode 3: Hazbin Hotel: Behind Closed Doors",
         description: "Charlie invites Voxtek to do a piece on the Hotel and Pentious' redemption. But she will need hard proof to convince her skeptical guests.",
         thumbnail: "https://files.catbox.moe/svs231.png",
-        airDate: "2025-11-05" // ✅ KEPT: This will remain grayed out
+        url: "https://player.vimeo.com/video/1133784059"
       },
       {
         title: "Episode 4: It's A Deal",
         description: "Charlie tries to do damage control by going live on television! Meanwhile, Alastor reaches his final straw.",
         thumbnail: "https://files.catbox.moe/hb91sh.png",
-        airDate: "2025-11-05" // ✅ KEPT: This will remain grayed out
+        url: "https://player.vimeo.com/video/1133784794"
       },
       {
         title: "Episode 5: Silenced",
@@ -374,87 +374,8 @@ window.addEventListener("DOMContentLoaded", () => {
       }
   });
 
-  // ✅ NEW: Logic for the "About" Modal
-  const logoTrigger = document.getElementById("about-logo-trigger");
-  const aboutModal = document.getElementById("about-modal");
-  // Note: Your CSS already targets #modal-close-btn, so we use that ID
-  const modalCloseBtn = document.getElementById("modal-close-btn");
-
-  if (logoTrigger && aboutModal && modalCloseBtn) {
-    // Open modal when logo is clicked
-    logoTrigger.addEventListener("click", () => {
-      aboutModal.classList.add("show");
-    });
-
-    // Close modal with the "Go Back" button
-    modalCloseBtn.addEventListener("click", () => {
-      aboutModal.classList.remove("show");
-    });
-
-    // Close modal by clicking on the blurred overlay
-    aboutModal.addEventListener("click", (e) => {
-      // We check if the click was on the overlay itself, not the content box
-      if (e.target === aboutModal) {
-        aboutModal.classList.remove("show");
-      }
-    });
-  }
-  // --- End of new modal logic ---
-
   document.body.style.opacity = 0;
   document.body.style.transition = "opacity 420ms ease";
   requestAnimationFrame(() => (document.body.style.opacity = 1));
 
-  // --- Custom Smooth Scroll with Easing ---
-  
-  // Find all links that start with '#'
-  const allAnchorLinks = document.querySelectorAll('a[href^="#"]');
-  
-  allAnchorLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      // 1. Stop the default "jump"
-      e.preventDefault();
-      
-      const href = this.getAttribute('href');
-      const targetId = href.substring(1); // Get the ID name (e.g., "seasons")
-      const targetElement = document.getElementById(targetId);
-      
-      if (targetElement) {
-        // 2. Get the position we need to scroll to
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        
-        // 3. Call our custom scroll function
-        customSmoothScroll(targetPosition, 500); // 1000ms = 1 second duration
-      }
-    });
-  });
-
-  // Our custom animation function
-  function customSmoothScroll(targetPosition, duration) {
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-
-    // Easing function: easeInOutQuad
-    // 't' is progress from 0 to 1
-    const easeInOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-
-    function animationLoop(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      
-      const timeElapsed = currentTime - startTime;
-      const progress = Math.min(timeElapsed / duration, 1); // 0 to 1
-      const easedProgress = easeInOutQuad(progress); // Apply easing
-      
-      const newPosition = startPosition + distance * easedProgress;
-      window.scrollTo(0, newPosition);
-
-      // Keep animating until duration is over
-      if (timeElapsed < duration) {
-        requestAnimationFrame(animationLoop);
-      }
-    }
-    requestAnimationFrame(animationLoop);
-  }
-  // --- End of Custom Smooth Scroll ---
 });
