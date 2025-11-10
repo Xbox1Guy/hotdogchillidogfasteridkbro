@@ -15,63 +15,63 @@ const seasonData = {
         title: "Pilot: That's Entertainment",
         description: "Charlie, the princess of Hell, pursues her seemingly impossible goal of rehabilitating demons to peacefully reduce overpopulation in her kingdom.",
         thumbnail: "https://files.catbox.moe/rliimo.jpg",
-        url: "https://player.vimeo.com/video/1132843685?autoplay=1&playsinline=1", // 🛑 This MP4 link will likely not play in the new <iframe>
+        url: "https://player.vimeo.com/video/1132843685?autoplay=1&playsinline=1", // 🛑 This was not in the new file, so it remains unchanged.
         subtitles: "subtitles/Hazbin-Hotel-s1-e0_1080p.en.vtt"
       },
       {
         title: "Episode 1: Overture",
         description: "Charlie pitches her plan to rehabilitate sinners to Heaven. Vaggie creates a commercial to promote the hotel, with disastrous results.",
         thumbnail: "https://files.catbox.moe/vw6i1j.jpg",
-        url: "https://player.vimeo.com/video/1132850961?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp5c?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e1_1080p.en.vtt"
       },
       {
         title: "Episode 2: Radio Killed the Video Star",
         description: "The Radio Demon, Alastor, arrives and offers to help Charlie run the hotel, but his intentions are questionable. A new threat emerges.",
         thumbnail: "https://files.catbox.moe/ydyssy.jpg",
-        url: "https://player.vimeo.com/video/1131118641?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp5V?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e2_1080p.en.vtt"
       },
       {
         title: "Episode 3: Scrambled Eggs",
         description: "While the hotel residents try to make a commercial, the bumbling inventor Sir Pentious attacks, seeking to challenge Alastor.",
         thumbnail: "https://files.catbox.moe/yk0p2b.jpg",
-        url: "https://player.vimeo.com/video/1131120560?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp5n?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e3_1080p.en.vtt"
       },
       {
         title: "Episode 4: Masquerade",
         description: "Angel Dust's abusive boss, Valentino, calls him to work. Charlie's attempt to intervene reveals the darker side of Angel's life.",
         thumbnail: "https://files.catbox.moe/j3x9gr.png",
-        url: "https://player.vimeo.com/video/1131122132?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp5e?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e4_1080p.en.vtt"
       },
       {
         title: "Episode 5: Dad Beat Dad",
         description: "Lucifer, the King of Hell and Charlie's father, visits the hotel and clashes with Alastor over his skepticism of Charlie's dream.",
         thumbnail: "https://files.catbox.moe/jr7h23.png",
-        url: "https://player.vimeo.com/video/1131123659?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp5f?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e5_1080p.en.vtt"
       },
       {
         title: "Episode 6: Welcome to Heaven",
         description: "Charlie and Vaggie travel to Heaven to plead their case directly to the angels, but the meeting with Adam does not go as planned.",
         thumbnail: "https://files.catbox.moe/bumhsm.jpg",
-        url: "https://player.vimeo.com/video/1131125348?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp5h?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e6_1080p.en.vtt"
       },
       {
         title: "Episode 7: Hello Rosie",
         description: "With extermination imminent, Charlie seeks help from the cannibals of Hell to build an army and defend the hotel.",
         thumbnail: "https://files.catbox.moe/8mldzz.png",
-        url: "https://player.vimeo.com/video/1131127189?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp51?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e7_1080p.en.vtt"
       },
       {
         title: "Episode 8: The Show Must Go On",
         description: "Adam and his exorcist army descend on the hotel. The residents and their allies must fight for their lives and for the future of redemption.",
         thumbnail: "https://files.catbox.moe/snp32b.png",
-        url: "https://player.vimeo.com/video/1131532740?autoplay=1&playsinline=1", // ✅ Vimeo URL
+        url: "https://go.screenpal.com/player/cTX6QnnFp5i?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", // ✅ UPDATED URL
         subtitles: "subtitles/Hazbin-Hotel-s1-e8_1080p.en.vtt"
       }
     ]
@@ -83,51 +83,49 @@ const seasonData = {
         title: "Episode 1: New Pentious",
         description: "Charlie's victory against Heaven has sinners flocking to the newly rebuilt Hazbin Hotel. But can she make sure they're all there for the right reasons? Meanwhile, Vox reveals his plan for the Vees to gain their ultimate victory.",
         thumbnail: "https://files.catbox.moe/3dokf8.png",
-        // ✅ CHANGED: URL added, airDate removed
-        url: "https://player.vimeo.com/video/1131586963"
+        url: "https://go.screenpal.com/player/cTXirynFAt6?width=100%&height=100%&ff=1&title=0&ahc=1&dcc=1&download=1" // ✅ UPDATED URL
       },
       {
         title: "Episode 2: Storyteller",
         description: "Sir Pentious' redemption creates a stir in Heaven, but not everyone is happy to see a sinner redeemed.",
         thumbnail: "https://files.catbox.moe/mezpeg.png",
-        // ✅ CHANGED: URL added, airDate removed
-        url: "https://player.vimeo.com/video/1131593958"
+        url: "https://go.screenpal.com/player/cTXi2UnFzq2?width=100%&height=100%&ff=1&title=0&dcc=1&download=1" // ✅ UPDATED URL
       },
       {
         title: "Episode 3: Hazbin Hotel: Behind Closed Doors",
         description: "Charlie invites Voxtek to do a piece on the Hotel and Pentious' redemption. But she will need hard proof to convince her skeptical guests.",
         thumbnail: "https://files.catbox.moe/svs231.png",
-        url: "https://player.vimeo.com/video/1133784059"
+        url: "https://go.screenpal.com/player/cTXQFFnFgNq?width=100%&height=100%&ff=1&title=0&dcc=1&download=1" // ✅ UPDATED URL
       },
       {
         title: "Episode 4: It's A Deal",
         description: "Charlie tries to do damage control by going live on television! Meanwhile, Alastor reaches his final straw.",
         thumbnail: "https://files.catbox.moe/hb91sh.png",
-        url: "https://player.vimeo.com/video/1133784794"
+        url: "https://go.screenpal.com/player/cTXQFdnFgP7?width=100%&height=100%&ff=1&title=0&dcc=1&download=1" // ✅ UPDATED URL
       },
       {
         title: "Episode 5: Silenced",
         description: "Vox hosts a rally for his increasing supporters. Meanwhile, Charlie looks to Heaven for help.",
         thumbnail: "https://files.catbox.moe/7cwonn.png",
-        airDate: "2025-11-12" // ✅ KEPT: This will remain grayed out
+        airDate: "2025-11-12" // 🛑 No new URL provided, remains placeholder
       },
       {
         title: "Episode 6: Scream Rain",
         description: "Vox leads the overlords toward war with Heaven. Tensions run high at the hotel and Husk returns to his old ways.",
         thumbnail: "https://files.catbox.moe/14u3zn.png",
-        airDate: "2025-11-12" // ✅ KEPT: This will remain grayed out
+        airDate: "2025-11-12" // 🛑 No new URL provided, remains placeholder
       },
       {
         title: "Episode 7: Weapon of Mass Distraction",
         description: "Vox unveils his secret weapon, giving Heaven their final warning.",
         thumbnail: "https://files.catbox.moe/23oy8v.png",
-        airDate: "2025-11-19" // ✅ KEPT: This will remain grayed out
+        airDate: "2025-11-19" // 🛑 No new URL provided, remains placeholder
       },
       {
         title: "Episode 8: Curtain Call",
         description: "Vox (and the Vees, I guess) is hosting a party so everyone can watch him take over Heaven - and you're all invited!",
         thumbnail: "https://files.catbox.moe/xrr5jv.png",
-        airDate: "2025-11-19" // ✅ KEPT: This will remain grayed out
+        airDate: "2025-11-19" // 🛑 No new URL provided, remains placeholder
       }
     ]
   }
