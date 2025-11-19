@@ -195,13 +195,19 @@ const seasonData = {
         title: "Episode 7: Weapon of Mass Distraction",
         description: "Vox unveils his secret weapon, giving Heaven their final warning.",
         thumbnail: "https://files.catbox.moe/23oy8v.png",
-        airDate: "2025-11-19" 
+        urls: [
+            "https://drive.google.com/file/d/1SmAtc4P4RRL_QYHPc3rJR1lFdNxlQpKv/preview"
+        ]
       },
       {
         title: "Episode 8: Curtain Call",
         description: "Vox (and the Vees, I guess) is hosting a party so everyone can watch him take over Heaven - and you're all invited!",
         thumbnail: "https://files.catbox.moe/xrr5jv.png",
-        airDate: "2025-11-19" 
+        // 👇 Added your new link here (converted to /preview)
+        urls: [
+            "https://drive.google.com/file/d/17Hr7oTtkbhJhJcIIYTU54hoxoo2rfDNE/preview"
+        ]
+        // ❌ Deleted the 'airDate' line so the button becomes clickable
       }
     ]
   }
