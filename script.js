@@ -6,27 +6,41 @@ function goToSeason(seasonNumber) {
   window.location.href = `video.html?season=${encodeURIComponent(seasonNumber)}`;
 }
 
-// 🔹 HELPER: Converts standard Drive links to Embed links automatically
+// 🔹 HELPER: Converts links to DIRECT VIEW (Not Embed) to bypass quota
 function formatDriveLink(link) {
   if (!link) return "";
   
-  // Handle standard /view links
-  if (link.includes("/view")) {
-    return link.replace("/view", "/preview");
+  // If it's an embed link (/preview), switch it to /view
+  if (link.includes("/preview")) {
+    return link.replace("/preview", "/view");
   }
   
-  // Handle /open?id= links (The format you provided)
+  // If it's an ID link (open?id=), switch to /view
   if (link.includes("open?id=")) {
     const id = link.split("id=")[1].split("&")[0];
-    return `https://drive.google.com/file/d/${id}/preview`;
+    return `https://drive.google.com/file/d/${id}/view`;
   }
   
   return link;
 }
 
+// 🔹 HELPER: Launch Video Logic
+function playOrOpen(link) {
+    const videoPlayer = document.getElementById("video-frame");
+    const formattedLink = formatDriveLink(link);
+
+    // Check if it is a Google Drive link
+    if (formattedLink.includes("drive.google.com")) {
+        // 🛑 EMERGENCY FIX: Open in new tab to bypass embed limits
+        window.open(formattedLink, '_blank');
+    } else {
+        // If it's another host (like Vimeo/ScreenPal), play in iframe as normal
+        videoPlayer.src = formattedLink;
+    }
+}
+
 // 🔹 HELPER: Switch Server Function
 function switchServer(serverIndex) {
-  const videoPlayer = document.getElementById("video-frame");
   const serverBtns = document.querySelectorAll("#server-controls .btn");
 
   // Update active button style
@@ -38,21 +52,15 @@ function switchServer(serverIndex) {
   // Get current episode data from the global variable
   if (window.currentEpisodeData && window.currentEpisodeData.urls) {
      if (window.currentEpisodeData.urls[serverIndex]) {
-         // Save current timestamp to resume playback seamlessly
-         // const currentTime = videoPlayer.currentTime; 
-         
-         // Auto-format the link before setting it
-         const sourceLink = formatDriveLink(window.currentEpisodeData.urls[serverIndex]);
-         videoPlayer.src = sourceLink;
-         
-         console.log(`Switched to Server ${serverIndex + 1}`);
+         console.log(`Switching to Server ${serverIndex + 1}`);
+         playOrOpen(window.currentEpisodeData.urls[serverIndex]);
      } else {
          alert("This server is not available for this episode.");
      }
   }
 }
 
-// 🔹 Define your season data
+// SEASON DATA STUFF
 const seasonData = {
   '1': {
     title: "Season 1",
@@ -61,64 +69,109 @@ const seasonData = {
         title: "Pilot: That's Entertainment",
         description: "Charlie, the princess of Hell, pursues her seemingly impossible goal of rehabilitating demons to peacefully reduce overpopulation in her kingdom.",
         thumbnail: "https://files.catbox.moe/rliimo.jpg",
-        url: "https://player.vimeo.com/video/1132843685?autoplay=1&playsinline=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e0_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e0_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1ilvrAfnoAjRGERsMWHAp9wyQszQne7oJ&usp=drive_copy",
+            "https://drive.google.com/open?id=1JGsl60v6JFWIZbN8F5n8Uc4r-TcqMbXH&usp=drive_copy",
+            "https://drive.google.com/open?id=1o6uRxz73ac-HmWc-SBxaZjd_Il_g4zUn&usp=drive_copy",
+            "https://drive.google.com/open?id=16uVr6yguTvAJJJo0WEbUa2x7L-MVdszN&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 1: Overture",
         description: "Charlie pitches her plan to rehabilitate sinners to Heaven. Vaggie creates a commercial to promote the hotel, with disastrous results.",
         thumbnail: "https://files.catbox.moe/vw6i1j.jpg",
-        url: "https://go.screenpal.com/player/cTX6QnnFp5c?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e1_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e1_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1MLQhjzRAJ06H8Rzohv6yVX-EaZWylhRb&usp=drive_copy",
+            "https://drive.google.com/open?id=1Li1Z-aOpQYoX10LTQlQz_0ijzAYjiu4Q&usp=drive_copy",
+            "https://drive.google.com/open?id=1_rLpymOBWjLh_JtyzAFQDNZWq_ceb7Dm&usp=drive_copy",
+            "https://drive.google.com/open?id=18PPOyjo46b8kpzpOG6gg-6MobSqsjmpQ&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 2: Radio Killed the Video Star",
         description: "The Radio Demon, Alastor, arrives and offers to help Charlie run the hotel, but his intentions are questionable. A new threat emerges.",
         thumbnail: "https://files.catbox.moe/ydyssy.jpg",
-        url: "https://go.screenpal.com/player/cTX6QnnFp5V?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e2_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e2_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1njVbYdkXRqpY3J2c82t1wqYsX_RxPJ_3&usp=drive_copy",
+            "https://drive.google.com/open?id=1V9EzhYWBB1TL8w9NJhCQ9sCKNWpzecAA&usp=drive_copy",
+            "https://drive.google.com/open?id=1rMz56Q0sWTUzBncIqaoqknAfIPLC6WAD&usp=drive_copy",
+            "https://drive.google.com/open?id=1SVgnUVP5pXwvH42LxIgtPnM3zEmS03bS&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 3: Scrambled Eggs",
         description: "While the hotel residents try to make a commercial, the bumbling inventor Sir Pentious attacks, seeking to challenge Alastor.",
         thumbnail: "https://files.catbox.moe/yk0p2b.jpg",
-        url: "https://go.screenpal.com/player/cTX6QnnFp5n?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e3_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e3_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1Yq-K9LWK9ZSqyqBT0qWKClm6cKJsuZbl&usp=drive_copy",
+            "https://drive.google.com/open?id=1gW-GQ2GLw4ntUkcfNgCtd6dCm-y2IjOy&usp=drive_copy",
+            "https://drive.google.com/open?id=10QoVRGWkptZCp6y3t98EwopDAaJKrONA&usp=drive_copy",
+            "https://drive.google.com/open?id=1Ab2LBfcidGGyqgG6z56qT24KEpUuFFj-&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 4: Masquerade",
         description: "Angel Dust's abusive boss, Valentino, calls him to work. Charlie's attempt to intervene reveals the darker side of Angel's life.",
         thumbnail: "https://files.catbox.moe/j3x9gr.png",
-        url: "https://go.screenpal.com/player/cTX6QnnFp5e?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e4_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e4_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1N7lOWCyopldp2FPDaYs3tpCPbper7C4k&usp=drive_copy",
+            "https://drive.google.com/open?id=1LaDY-MVFiCuy4gSFmIL9AHNyzCLeZxWj&usp=drive_copy",
+            "https://drive.google.com/open?id=1y-Ey0VjAjxe5PyCuVTQZdUf5D7Nulw4b&usp=drive_copy",
+            "https://drive.google.com/open?id=1UjeU75HZtCvIeLy9Lpqnmqyujm7f7Jzh&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 5: Dad Beat Dad",
         description: "Lucifer, the King of Hell and Charlie's father, visits the hotel and clashes with Alastor over his skepticism of Charlie's dream.",
         thumbnail: "https://files.catbox.moe/jr7h23.png",
-        url: "https://go.screenpal.com/player/cTX6QnnFp5f?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e5_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e5_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1scnAOICN_QWQxZih3C139mI_3ok6_QpQ&usp=drive_copy",
+            "https://drive.google.com/open?id=1_94_SoCTKfyY-16d0WcR4TGhTTBqf2V8&usp=drive_copy",
+            "https://drive.google.com/open?id=1tbsQpZwnblajdpCB2mW4Ey2gs30XjQ9O&usp=drive_copy",
+            "https://drive.google.com/open?id=1CqLEUzylRjQ2jTaUqlmC1z9uE74Stwsy&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 6: Welcome to Heaven",
         description: "Charlie and Vaggie travel to Heaven to plead their case directly to the angels, but the meeting with Adam does not go as planned.",
         thumbnail: "https://files.catbox.moe/bumhsm.jpg",
-        url: "https://go.screenpal.com/player/cTX6QnnFp5h?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e6_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e6_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1XZRub1F8M7FC8D_iSaZETes62ykMA1fp&usp=drive_copy",
+            "https://drive.google.com/open?id=1MnLOC5Cxg97-_0yt5bRc4d6Psnch9IMn&usp=drive_copy",
+            "https://drive.google.com/open?id=18C9r-vpCgKtCKa8YBg4Pqwn7owyI9bFj&usp=drive_copy",
+            "https://drive.google.com/open?id=1E02Z-F_Ayzu6YeoQTkezfq8rbEd5cpB1&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 7: Hello Rosie",
         description: "With extermination imminent, Charlie seeks help from the cannibals of Hell to build an army and defend the hotel.",
         thumbnail: "https://files.catbox.moe/8mldzz.png",
-        url: "https://go.screenpal.com/player/cTX6QnnFp51?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e7_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e7_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=1L8XdL0-kc4PdC8mC-SHg7-_iknG85Sgb&usp=drive_copy",
+            "https://drive.google.com/open?id=1tbwADWT_zFaIoM_5IbeG_fzg081DDKBm&usp=drive_copy",
+            "https://drive.google.com/open?id=1cb3rG1F6Ho0DhCuBkGo23KtMLnDwRJ10&usp=drive_copy",
+            "https://drive.google.com/open?id=1GktTNCbCcjsCCKlct-M65Yu6yAPPpiob&usp=drive_copy"
+        ]
       },
       {
         title: "Episode 8: The Show Must Go On",
         description: "Adam and his exorcist army descend on the hotel. The residents and their allies must fight for their lives and for the future of redemption.",
         thumbnail: "https://files.catbox.moe/snp32b.png",
-        url: "https://go.screenpal.com/player/cTX6QnnFp5i?width=100%&height=100%&ff=1&title=0&dcc=1&download=1", 
-        subtitles: "subtitles/Hazbin-Hotel-s1-e8_1080p.en.vtt"
+        subtitles: "subtitles/Hazbin-Hotel-s1-e8_1080p.en.vtt",
+        urls: [
+            "https://drive.google.com/open?id=10lrE3A2ea-h7-hJSfOpqm1PNnBONWv5h&usp=drive_copy",
+            "https://drive.google.com/open?id=1EsJNYs2IsSGHpPzXnuqUjp-UZfoOpRoR&usp=drive_copy",
+            "https://drive.google.com/open?id=1HK0oxXvJQSbAYNfp9EQHw21GctANvTqG&usp=drive_copy",
+            "https://drive.google.com/open?id=11CGRb8HyzsgXYH-lOTiyqznCVSKzl56V&usp=drive_copy"
+        ]
       }
     ]
   },
@@ -203,11 +256,9 @@ const seasonData = {
         title: "Episode 8: Curtain Call",
         description: "Vox (and the Vees, I guess) is hosting a party so everyone can watch him take over Heaven - and you're all invited!",
         thumbnail: "https://files.catbox.moe/xrr5jv.png",
-        // 👇 Added your new link here (converted to /preview)
         urls: [
             "https://drive.google.com/file/d/17Hr7oTtkbhJhJcIIYTU54hoxoo2rfDNE/preview"
         ]
-        // ❌ Deleted the 'airDate' line so the button becomes clickable
       }
     ]
   }
@@ -300,12 +351,13 @@ window.addEventListener("DOMContentLoaded", () => {
               // Handle Multiple Servers (Arrays) vs Single Links (Strings)
               if (episode.urls && episode.urls.length > 0) {
                   // If it has mirrors, show buttons and play the first one
-                  videoPlayer.src = formatDriveLink(episode.urls[0]);
-                  if(serverControls) serverControls.style.display = "block";
+                  playOrOpen(episode.urls[0]);
+                  
+                  if(serverControls) serverControls.style.display = "flex"; // Changed to flex for new toolbar style
                   switchServer(0); // Highlight first button
               } else {
                   // If it's a single link, hide buttons and play
-                  videoPlayer.src = formatDriveLink(episode.url);
+                  playOrOpen(episode.url);
                   if(serverControls) serverControls.style.display = "none";
               }
 
