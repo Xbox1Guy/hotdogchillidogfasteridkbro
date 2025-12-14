@@ -331,7 +331,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         card.innerHTML = `
           <img src="${episode.thumbnail}" alt="${episode.title}" class="episode-thumb">
-          <div class_name="episode-details">
+          <div class="episode-details">
             <h4>${episode.title}</h4>
             ${descriptionHTML}
             ${airDateHTML}
@@ -441,4 +441,82 @@ window.addEventListener("DOMContentLoaded", () => {
   document.body.style.transition = "opacity 420ms ease";
   requestAnimationFrame(() => (document.body.style.opacity = 1));
 
+});
+
+/* -----------------------------------------------
+   SECRET CODE LISTENER (UPDATED FOR YOUTUBE)
+   ----------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const secretCode = "tadcvivziepop"; // <--- SECRET WORD
+    let inputBuffer = "";
+    
+    const secretModal = document.getElementById("secret-modal");
+    const secretFrame = document.getElementById("secret-frame"); // Back to iframe
+    const secretCloseBtn = document.getElementById("secret-close-btn");
+    
+    // YOUTUBE EMBED LINK with Autoplay
+    const videoURL = "https://www.youtube.com/embed/UcMVmBNZfyo?autoplay=1";
+
+    if (secretModal && secretFrame && secretCloseBtn) {
+        
+        // 1. Listen for typing
+        window.addEventListener("keyup", (e) => {
+            // Add the key to the buffer (case insensitive)
+            inputBuffer += e.key.toLowerCase();
+
+            // If the buffer is longer than the code, trim the beginning
+            if (inputBuffer.length > secretCode.length) {
+                inputBuffer = inputBuffer.slice(-secretCode.length);
+            }
+
+            // Check if it matches
+            if (inputBuffer === secretCode) {
+                secretModal.classList.add("show");
+                secretFrame.src = videoURL;
+                inputBuffer = ""; // Reset buffer
+                console.log("Secret Activated!");
+            }
+        });
+
+        // 2. Close Function
+        const closeSecret = () => {
+            secretModal.classList.remove("show");
+            secretFrame.src = ""; // Clear src to stop video
+        };
+
+        // 3. Bind Close Events
+        secretCloseBtn.addEventListener("click", closeSecret);
+        
+        // Close if clicking the dark background outside the modal
+        secretModal.addEventListener("click", (e) => {
+            if (e.target === secretModal) closeSecret();
+        });
+    }
+});
+
+/* --- ABOUT MODAL LOGIC (ADDED) --- */
+document.addEventListener('DOMContentLoaded', () => {
+    const aboutTrigger = document.getElementById('about-logo-trigger');
+    const aboutModal = document.getElementById('about-modal');
+    const aboutCloseBtn = document.getElementById('modal-close-btn');
+
+    if (aboutTrigger && aboutModal && aboutCloseBtn) {
+        // Open Modal
+        aboutTrigger.addEventListener('click', () => {
+            aboutModal.classList.add('show');
+        });
+
+        // Close Function
+        const closeAbout = () => {
+            aboutModal.classList.remove('show');
+        };
+
+        // Close on Button Click
+        aboutCloseBtn.addEventListener('click', closeAbout);
+
+        // Close on Outside Click
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) closeAbout();
+        });
+    }
 });
