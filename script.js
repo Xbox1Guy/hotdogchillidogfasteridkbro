@@ -444,57 +444,98 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* -----------------------------------------------
-   SECRET CODE LISTENER (UPDATED FOR YOUTUBE)
+   SECRET CODE LISTENER (UPDATED WITH MOBILE MENU)
    ----------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     const secretCode = "tadcvivziepop"; // <--- SECRET WORD
-    let inputBuffer = "";
     
+    // Modal Elements
     const secretModal = document.getElementById("secret-modal");
-    const secretFrame = document.getElementById("secret-frame"); // Back to iframe
+    const secretFrame = document.getElementById("secret-frame"); 
     const secretCloseBtn = document.getElementById("secret-close-btn");
     
+    // New Input Modal Elements
+    const secretInputModal = document.getElementById("secret-input-modal");
+    const secretCodeInput = document.getElementById("secret-code-input");
+    const secretSubmitBtn = document.getElementById("secret-submit-btn");
+    const secretInputCloseBtn = document.getElementById("secret-input-close-btn");
+
     // YOUTUBE EMBED LINK with Autoplay
     const videoURL = "https://www.youtube.com/embed/UcMVmBNZfyo?autoplay=1";
 
     if (secretModal && secretFrame && secretCloseBtn) {
         
-        // 1. Listen for typing
-        window.addEventListener("keyup", (e) => {
-            // Add the key to the buffer (case insensitive)
-            inputBuffer += e.key.toLowerCase();
+        // 1. Mobile Support: Tap Logo inside About Modal 7 times
+        const triggerElement = document.getElementById("about-secret-logo");
+        let tapCount = 0;
+        let tapTimer;
 
-            // If the buffer is longer than the code, trim the beginning
-            if (inputBuffer.length > secretCode.length) {
-                inputBuffer = inputBuffer.slice(-secretCode.length);
-            }
+        if (triggerElement) {
+            triggerElement.addEventListener("click", () => {
+                tapCount++;
+                
+                // Reset count if user stops tapping for 1 second
+                clearTimeout(tapTimer);
+                tapTimer = setTimeout(() => tapCount = 0, 1000);
 
-            // Check if it matches
-            if (inputBuffer === secretCode) {
-                secretModal.classList.add("show");
-                secretFrame.src = videoURL;
-                inputBuffer = ""; // Reset buffer
-                console.log("Secret Activated!");
-            }
-        });
+                if (tapCount >= 7) {
+                    // Open the nice modal instead of prompt
+                    secretInputModal.classList.add("show");
+                    secretCodeInput.value = ""; // Clear previous
+                    secretCodeInput.focus();
+                    tapCount = 0; // Reset after trigger
+                }
+            });
+        }
 
-        // 2. Close Function
-        const closeSecret = () => {
+        // 2. Handle Submit from Input Modal
+        const checkInput = () => {
+             if (secretCodeInput.value.toLowerCase() === secretCode) {
+                 secretInputModal.classList.remove("show"); // Close input
+                 secretModal.classList.add("show"); // Open video
+                 secretFrame.src = videoURL;
+                 console.log("Secret Activated via Mobile Menu!");
+             } else {
+                 // visual feedback for wrong code (Red Border Flash)
+                 secretCodeInput.style.borderColor = "red";
+                 setTimeout(() => secretCodeInput.style.borderColor = "rgba(255,255,255,0.2)", 500);
+             }
+        };
+
+        if(secretSubmitBtn) secretSubmitBtn.addEventListener("click", checkInput);
+        
+        // Handle "Enter" key in input
+        if(secretCodeInput) {
+            secretCodeInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") checkInput();
+            });
+        }
+
+        // 3. Close Functions
+        const closeSecretVideo = () => {
             secretModal.classList.remove("show");
             secretFrame.src = ""; // Clear src to stop video
         };
 
-        // 3. Bind Close Events
-        secretCloseBtn.addEventListener("click", closeSecret);
+        const closeSecretInput = () => {
+            secretInputModal.classList.remove("show");
+        };
+
+        // Bind Close Events
+        if (secretCloseBtn) secretCloseBtn.addEventListener("click", closeSecretVideo);
+        if (secretInputCloseBtn) secretInputCloseBtn.addEventListener("click", closeSecretInput);
         
-        // Close if clicking the dark background outside the modal
+        // Close if clicking the dark background outside the modals
         secretModal.addEventListener("click", (e) => {
-            if (e.target === secretModal) closeSecret();
+            if (e.target === secretModal) closeSecretVideo();
+        });
+        secretInputModal.addEventListener("click", (e) => {
+            if (e.target === secretInputModal) closeSecretInput();
         });
     }
 });
 
-/* --- ABOUT MODAL LOGIC (ADDED) --- */
+/* --- ABOUT MODAL LOGIC --- */
 document.addEventListener('DOMContentLoaded', () => {
     const aboutTrigger = document.getElementById('about-logo-trigger');
     const aboutModal = document.getElementById('about-modal');

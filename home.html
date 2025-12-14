@@ -116,7 +116,7 @@
 
   <div class="modal-overlay" id="about-modal">
     <div class="modal-content">
-      <img src="https://files.catbox.moe/l4kdn8.png" alt="Hazbin Archives Logo" style="height: 60px; margin-bottom: 1rem;">
+      <img id="about-secret-logo" src="https://files.catbox.moe/l4kdn8.png" alt="Hazbin Archives Logo" style="height: 60px; margin-bottom: 1rem; cursor: pointer;">
       
       <h3>About Us! :D</h3>
       
@@ -130,6 +130,17 @@
       </p>
       
       <button class="btn outline" id="modal-close-btn">Go Back</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="secret-input-modal">
+    <div class="modal-content">
+      <h3>Enter Secret Code</h3>
+      <input type="text" id="secret-code-input" placeholder="Type secret here..." autocomplete="off">
+      <div style="display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem;">
+          <button class="btn primary" id="secret-submit-btn">Unlock</button>
+          <button class="btn outline" id="secret-input-close-btn">Cancel</button>
+      </div>
     </div>
   </div>
 
